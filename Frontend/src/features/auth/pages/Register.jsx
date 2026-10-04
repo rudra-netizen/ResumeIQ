@@ -1,60 +1,54 @@
-import React,{useState} from 'react'
-import { useNavigate, Link } from 'react-router'
-import { useAuth } from '../hooks/useAuth'
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import "../auth.form.scss";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-    const navigate = useNavigate()
-    const [ username, setUsername ] = useState("")
-    const [ email, setEmail ] = useState("")
-    const [ password, setPassword ] = useState("")
+  const googleError = searchParams.get("googleError");
 
-    const {loading,handleRegister} = useAuth()
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
-    }
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(googleError || "");
 
-    if(loading){
-        return (<main><h1>Loading.......</h1></main>)
-    }
+  const handleGoogleSignup = () => {
+    setLoading(true);
+    setError("");
 
-    return (
-        <main>
-            <div className="form-container">
-                <h1>Register</h1>
+    window.location.href = "http://localhost:3000/api/auth/google";
+  };
 
-                <form onSubmit={handleSubmit}>
+  return (
+    <main>
+      <div className="form-container">
+        <h1>Create Account</h1>
 
-                    <div className="input-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            onChange={(e) => { setUsername(e.target.value) }}
-                            type="text" id="username" name='username' placeholder='Enter username' />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            onChange={(e) => { setEmail(e.target.value) }}
-                            type="email" id="email" name='email' placeholder='Enter email address' />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            onChange={(e) => { setPassword(e.target.value) }}
-                            type="password" id="password" name='password' placeholder='Enter password' />
-                    </div>
+        <p>Create your ResumeIQ account</p>
 
-                    <button className='button primary-button' >Register</button>
+        {error && <div className="error-message">{error}</div>}
 
-                </form>
+        <button
+          type="button"
+          className="button primary-button"
+          onClick={handleGoogleSignup}
+          disabled={loading}
+        >
+          {loading ? "Connecting..." : "Continue with Google"}
+        </button>
 
-                <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
-            </div>
-        </main>
-    )
-}
+        <p>
+          Already have an account?{" "}
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => navigate("/login")}
+          >
+            Sign In
+          </button>
+        </p>
+      </div>
+    </main>
+  );
+};
 
-export default Register
+export default Register;

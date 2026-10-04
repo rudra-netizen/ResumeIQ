@@ -1,39 +1,36 @@
-const { Router } = require('express')
-const authController = require("../controllers/auth.controller")
-const authMiddleware = require("../middlewares/auth.middleware")
+const express = require("express");
 
-const authRouter = Router()
+const {
+  register,
+  login,
+  logout,
+  getMe,
 
-/**
- * @route POST /api/auth/register
- * @description Register a new user
- * @access Public
- */
-authRouter.post("/register", authController.registerUserController)
+  googleSignup,
+  googleSignupCallback,
+  completeGoogleSignup,
+} = require("../controllers/auth.controller");
 
+const authUser = require("../middlewares/auth.middleware");
 
-/**
- * @route POST /api/auth/login
- * @description login user with email and password
- * @access Public
- */
-authRouter.post("/login", authController.loginUserController)
+const router = express.Router();
 
+// Normal authentication
 
-/**
- * @route GET /api/auth/logout
- * @description clear token from user cookie and add the token in blacklist
- * @access public
- */
-authRouter.get("/logout", authController.logoutUserController)
+router.post("/register", register);
 
+router.post("/login", login);
 
-/**
- * @route GET /api/auth/get-me
- * @description get the current logged in user details
- * @access private
- */
-authRouter.get("/get-me", authMiddleware.authUser, authController.getMeController)
+router.post("/logout", logout);
 
+router.get("/me", authUser, getMe);
 
-module.exports = authRouter
+// Google OAuth signup
+
+router.get("/google", googleSignup);
+
+router.get("/google/callback", googleSignupCallback);
+
+router.post("/google/complete-signup", completeGoogleSignup);
+
+module.exports = router;

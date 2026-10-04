@@ -1,41 +1,24 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
+const authRoutes = require("./routes/auth.routes");
+const interviewRoutes = require("./routes/interview.routes");
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
-
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   }),
 );
 
 app.use(express.json());
-
-app.use(
-  express.urlencoded({
-    extended: true,
-  }),
-);
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const authRouter = require("./routes/auth.routes");
-
-const interviewRouter = require("./routes/interview.routes");
-
-app.use("/api/auth", authRouter);
-
-app.use("/api/interview", interviewRouter);
-
-app.use((err, req, res, next) => {
-  console.error(err);
-
-  return res.status(err.statusCode || 500).json({
-    message: err.message || "Something went wrong.",
-  });
-});
+app.use("/api/auth", authRoutes);
+app.use("/api/interview", interviewRoutes);
 
 module.exports = app;

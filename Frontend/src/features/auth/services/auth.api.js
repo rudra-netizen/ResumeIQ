@@ -1,38 +1,47 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-
+const API = axios.create({
+  baseURL: "http://localhost:3000/api",
   withCredentials: true,
 });
 
-export async function register({ username, email, password }) {
-  const response = await api.post("/api/auth/register", {
+export const registerUser = async ({ username, email, password }) => {
+  const response = await API.post("/auth/register", {
     username,
     email,
     password,
   });
 
   return response.data;
-}
+};
 
-export async function login({ email, password }) {
-  const response = await api.post("/api/auth/login", {
+export const loginUser = async ({ email, password }) => {
+  const response = await API.post("/auth/login", {
     email,
     password,
   });
 
   return response.data;
-}
+};
 
-export async function logout() {
-  const response = await api.get("/api/auth/logout");
-
-  return response.data;
-}
-
-export async function getMe() {
-  const response = await api.get("/api/auth/get-me");
+export const completeGoogleSignup = async ({ token, username, password }) => {
+  const response = await API.post("/auth/google/complete-signup", {
+    token,
+    username,
+    password,
+  });
 
   return response.data;
-}
+};
+
+export const logoutUser = async () => {
+  const response = await API.post("/auth/logout");
+
+  return response.data;
+};
+
+export const getMe = async () => {
+  const response = await API.get("/auth/me");
+
+  return response.data;
+};

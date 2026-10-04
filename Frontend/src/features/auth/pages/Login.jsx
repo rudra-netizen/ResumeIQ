@@ -9,11 +9,23 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleLogin({ email, password });
-    navigate("/");
+
+    setError("");
+
+    try {
+      await handleLogin({
+        email: email.trim(),
+        password,
+      });
+
+      navigate("/");
+    } catch (error) {
+      setError(error.response?.data?.message || "Invalid email or password");
+    }
   };
 
   if (loading) {
@@ -28,9 +40,15 @@ const Login = () => {
     <main>
       <div className="form-container">
         <h1>Login</h1>
+
+        <p>Sign in to your ResumeIQ account</p>
+
+        {error && <div className="error-message">{error}</div>}
+
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
+
             <input
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -39,10 +57,14 @@ const Login = () => {
               id="email"
               name="email"
               placeholder="Enter email address"
+              value={email}
+              required
             />
           </div>
+
           <div className="input-group">
             <label htmlFor="password">Password</label>
+
             <input
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -51,12 +73,22 @@ const Login = () => {
               id="password"
               name="password"
               placeholder="Enter password"
+              value={password}
+              required
             />
           </div>
-          <button className="button primary-button">Login</button>
+
+          <button
+            type="submit"
+            className="button primary-button"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
+
         <p>
-          Don't have an account? <Link to={"/register"}>Register</Link>{" "}
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </main>

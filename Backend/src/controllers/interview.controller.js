@@ -9,6 +9,32 @@ const {
   generateResumePdf,
 } = require("../services/ai.service");
 
+// ======================================================
+// GET AUTHENTICATED USER ID
+// ======================================================
+
+function getAuthenticatedUserId(req) {
+  const userId = req.user?.userId || req.user?.id;
+
+  if (!userId) {
+    const error = new Error("Authenticated user not found.");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    const error = new Error("Invalid authenticated user ID.");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  return userId;
+}
+
+// ======================================================
+// DERIVE INTERVIEW TITLE
+// ======================================================
+
 function deriveInterviewTitle(jobDescription) {
   if (!jobDescription || !jobDescription.trim()) {
     return "Interview Strategy";
@@ -26,6 +52,10 @@ function deriveInterviewTitle(jobDescription) {
   return firstLine.length > 60 ? `${firstLine.slice(0, 60)}...` : firstLine;
 }
 
+// ======================================================
+// EXTRACT RESUME TEXT
+// ======================================================
+
 async function extractResumeText(file) {
   if (!file || !file.buffer) {
     return "";
@@ -34,6 +64,7 @@ async function extractResumeText(file) {
   const fileName = file.originalname?.toLowerCase() || "";
   const mimeType = file.mimetype?.toLowerCase() || "";
 
+  // PDF
   if (mimeType === "application/pdf" || fileName.endsWith(".pdf")) {
     const parser = new PDFParse({
       data: file.buffer,
@@ -41,13 +72,13 @@ async function extractResumeText(file) {
 
     try {
       const result = await parser.getText();
-
       return result.text || "";
     } finally {
       await parser.destroy();
     }
   }
 
+  // DOCX
   if (
     mimeType ===
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
@@ -63,8 +94,14 @@ async function extractResumeText(file) {
   throw new Error("Only PDF and DOCX resume files are supported.");
 }
 
+// ======================================================
+// GENERATE INTERVIEW REPORT
+// ======================================================
+
 async function generateInterViewReportController(req, res) {
   try {
+    const userId = getAuthenticatedUserId(req);
+
     const { jobDescription, selfDescription } = req.body;
 
     if (!jobDescription || !jobDescription.trim()) {
@@ -91,14 +128,14 @@ async function generateInterViewReportController(req, res) {
       });
     }
 
+    // Generate AI report
     const interviewReport = await generateInterviewReport({
       resume: resumeText,
-
       selfDescription: selfDescription?.trim() || "",
-
       jobDescription: jobDescription.trim(),
     });
 
+    // Save report WITH CURRENT USER ID
     const savedReport = await interviewReportModel.create({
       jobDescription: jobDescription.trim(),
 
@@ -118,25 +155,31 @@ async function generateInterViewReportController(req, res) {
 
       title: interviewReport.title || deriveInterviewTitle(jobDescription),
 
-      user: req.user.id,
+      // IMPORTANT
+      user: userId,
     });
 
     return res.status(201).json({
       message: "Interview report generated successfully.",
-
       interviewReport: savedReport,
     });
   } catch (error) {
     console.error("Generate Interview Report Error:", error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       message: error.message || "Failed to generate interview report.",
     });
   }
 }
 
+// ======================================================
+// GET SINGLE INTERVIEW REPORT
+// ======================================================
+
 async function getInterviewReportByIdController(req, res) {
   try {
+    const userId = getAuthenticatedUserId(req);
+
     const { interviewId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(interviewId)) {
@@ -145,10 +188,11 @@ async function getInterviewReportByIdController(req, res) {
       });
     }
 
+    // IMPORTANT:
+    // ID + logged-in user's ID both must match
     const interviewReport = await interviewReportModel.findOne({
       _id: interviewId,
-
-      user: req.user.id,
+      user: userId,
     });
 
     if (!interviewReport) {
@@ -163,17 +207,25 @@ async function getInterviewReportByIdController(req, res) {
   } catch (error) {
     console.error("Get Interview Report Error:", error);
 
-    return res.status(500).json({
-      message: "Failed to get interview report.",
+    return res.status(error.statusCode || 500).json({
+      message: error.message || "Failed to get interview report.",
     });
   }
 }
 
+// ======================================================
+// GET ALL INTERVIEW REPORTS
+// ======================================================
+
 async function getAllInterviewReportsController(req, res) {
   try {
+    const userId = getAuthenticatedUserId(req);
+
+    // IMPORTANT:
+    // Only reports belonging to current user
     const interviewReports = await interviewReportModel
       .find({
-        user: req.user.id,
+        user: userId,
       })
       .sort({
         createdAt: -1,
@@ -185,14 +237,20 @@ async function getAllInterviewReportsController(req, res) {
   } catch (error) {
     console.error("Get All Interview Reports Error:", error);
 
-    return res.status(500).json({
-      message: "Failed to get interview reports.",
+    return res.status(error.statusCode || 500).json({
+      message: error.message || "Failed to get interview reports.",
     });
   }
 }
 
+// ======================================================
+// GENERATE RESUME PDF
+// ======================================================
+
 async function generateResumePdfController(req, res) {
   try {
+    const userId = getAuthenticatedUserId(req);
+
     const { interviewReportId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(interviewReportId)) {
@@ -201,10 +259,11 @@ async function generateResumePdfController(req, res) {
       });
     }
 
+    // IMPORTANT:
+    // User can generate PDF only for their own report
     const interviewReport = await interviewReportModel.findOne({
       _id: interviewReportId,
-
-      user: req.user.id,
+      user: userId,
     });
 
     if (!interviewReport) {
@@ -233,18 +292,19 @@ async function generateResumePdfController(req, res) {
   } catch (error) {
     console.error("Generate Resume PDF Error:", error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       message: error.message || "Failed to generate resume PDF.",
     });
   }
 }
 
+// ======================================================
+// EXPORTS
+// ======================================================
+
 module.exports = {
   generateInterViewReportController,
-
   getInterviewReportByIdController,
-
   getAllInterviewReportsController,
-
   generateResumePdfController,
 };
