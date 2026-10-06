@@ -1,0 +1,1999 @@
+$dark-page: #0d1117;
+$dark-card: #161b22;
+$dark-panel: #1c2230;
+$dark-input: #1e2535;
+$dark-border: #2a3348;
+$dark-text-primary: #e6edf3;
+$dark-text-muted: #7d8590;
+
+$accent: #ff2d78;
+$accent-alt: #ff6b9d;
+$success: #35d07f;
+
+$light-page: #f5f7fa;
+$light-card: #ffffff;
+$light-panel: #f8fafc;
+$light-input: #f1f5f9;
+$light-border: #d9dee7;
+$light-text-primary: #1f2937;
+$light-text-muted: #6b7280;
+
+$font-stack:
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  sans-serif;
+
+/* ======================================================
+   BASE PAGE
+====================================================== */
+
+.resume-pilot-page {
+  width: 100%;
+  height: 100dvh;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  background-color: $dark-page;
+
+  color: $dark-text-primary;
+
+  font-family: $font-stack;
+
+  box-sizing: border-box;
+
+  overscroll-behavior: none;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* ======================================================
+   SHELL
+====================================================== */
+
+.resume-pilot-shell {
+  width: 100%;
+  height: 100%;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  padding: 1rem 1.25rem 0.75rem;
+}
+
+/* ======================================================
+   TOP BAR
+====================================================== */
+
+.resume-pilot-topbar {
+  flex-shrink: 0;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 0 0.25rem;
+
+  margin-bottom: 0.75rem;
+}
+
+/* ======================================================
+   BRAND
+====================================================== */
+
+.resume-pilot-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.75rem;
+
+  min-width: 0;
+
+  h1 {
+    margin: 0;
+
+    font-size: 1.05rem;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: $dark-text-primary;
+
+    transition: color 0.25s ease;
+  }
+
+  p {
+    margin: 0.18rem 0 0;
+
+    font-size: 0.72rem;
+
+    color: $dark-text-muted;
+
+    white-space: nowrap;
+
+    transition: color 0.25s ease;
+  }
+}
+
+/* ======================================================
+   LOGO
+====================================================== */
+
+.resume-pilot-logo {
+  width: 40px;
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 0.7rem;
+
+  background: linear-gradient(135deg, $accent, $accent-alt);
+
+  color: #ffffff;
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+
+  box-shadow: 0 8px 24px rgba($accent, 0.18);
+}
+
+/* ======================================================
+   TOPBAR ACTIONS
+====================================================== */
+
+.resume-pilot-topbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.45rem;
+
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   DASHBOARD BUTTON
+====================================================== */
+
+.back-dashboard-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.45rem;
+
+  padding: 0.55rem 0.75rem;
+
+  border: 1px solid $dark-border;
+
+  border-radius: 0.55rem;
+
+  background-color: $dark-card;
+
+  color: $dark-text-primary;
+
+  font-family: $font-stack;
+
+  font-size: 0.78rem;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background-color: $dark-panel;
+
+    border-color: $accent;
+  }
+
+  span {
+    color: $accent;
+  }
+}
+
+/* ======================================================
+   WORKSPACE
+====================================================== */
+
+.resume-pilot-workspace {
+  flex: 1;
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    290px
+    minmax(0, 1fr);
+
+  gap: 0.75rem;
+}
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+
+.resume-pilot-sidebar {
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.75rem;
+
+  overflow: hidden;
+}
+
+/* ======================================================
+   SIDEBAR CARD
+====================================================== */
+
+.pilot-sidebar-card {
+  background-color: $dark-card;
+
+  border: 1px solid $dark-border;
+
+  border-radius: 0.8rem;
+
+  padding: 0.9rem;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ======================================================
+   SIDEBAR HEADING
+====================================================== */
+
+.sidebar-card-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 0.5rem;
+
+  margin-bottom: 0.6rem;
+
+  font-size: 0.8rem;
+
+  font-weight: 650;
+
+  color: $dark-text-primary;
+
+  transition: color 0.25s ease;
+}
+
+/* ======================================================
+   STATUS
+====================================================== */
+
+.status-dot {
+  color: $success;
+
+  font-size: 0.65rem;
+}
+
+.optional-label {
+  color: $dark-text-muted;
+
+  font-size: 0.62rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+
+  transition: color 0.25s ease;
+}
+
+/* ======================================================
+   MEMORY
+====================================================== */
+
+.memory-status {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.45rem;
+}
+
+.memory-status-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  color: $dark-text-muted;
+
+  font-size: 0.72rem;
+
+  transition: color 0.25s ease;
+}
+
+.status-check {
+  width: 17px;
+
+  height: 17px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background-color: rgba($success, 0.1);
+
+  color: $success;
+
+  font-size: 0.65rem;
+}
+
+.memory-badge {
+  margin-top: 0.7rem;
+
+  padding: 0.4rem 0.5rem;
+
+  border-radius: 0.45rem;
+
+  background-color: rgba($accent, 0.05);
+
+  border: 1px solid rgba($accent, 0.1);
+
+  color: $accent-alt;
+
+  font-size: 0.62rem;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* ======================================================
+   TARGET ROLE
+====================================================== */
+
+.sidebar-description {
+  margin: 0 0 0.6rem;
+
+  color: $dark-text-muted;
+
+  font-size: 0.68rem;
+
+  line-height: 1.45;
+
+  transition: color 0.25s ease;
+}
+
+.target-role-card {
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 175px;
+
+  textarea {
+    flex: 1;
+
+    min-height: 90px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    resize: none;
+
+    outline: none;
+
+    border: 1px solid $dark-border;
+
+    border-radius: 0.55rem;
+
+    padding: 0.65rem;
+
+    background-color: $dark-input;
+
+    color: $dark-text-primary;
+
+    font-family: $font-stack;
+
+    font-size: 0.7rem;
+
+    line-height: 1.45;
+
+    transition:
+      background-color 0.25s ease,
+      border-color 0.2s ease,
+      color 0.25s ease,
+      box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: $dark-text-muted;
+    }
+
+    &:focus {
+      border-color: $accent;
+
+      box-shadow: 0 0 0 2px rgba($accent, 0.08);
+    }
+  }
+}
+
+.textarea-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 0.3rem;
+
+  color: $dark-text-muted;
+
+  font-size: 0.6rem;
+
+  transition: color 0.25s ease;
+}
+
+/* ======================================================
+   QUICK PROMPTS
+====================================================== */
+
+.quick-prompts-card {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.quick-prompts {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.4rem;
+
+  padding-right: 2px;
+
+  scrollbar-width: thin;
+
+  button {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 0.45rem;
+
+    width: 100%;
+
+    padding: 0.55rem;
+
+    text-align: left;
+
+    border: 1px solid transparent;
+
+    border-radius: 0.5rem;
+
+    background-color: rgba(255, 255, 255, 0.025);
+
+    color: $dark-text-muted;
+
+    font-family: $font-stack;
+
+    font-size: 0.68rem;
+
+    line-height: 1.35;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+
+    span {
+      color: $accent;
+
+      font-size: 0.8rem;
+
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: rgba($accent, 0.05);
+
+      border-color: rgba($accent, 0.25);
+
+      color: $dark-text-primary;
+    }
+  }
+}
+
+/* ======================================================
+   CHAT PANEL
+====================================================== */
+
+.resume-pilot-chat-panel {
+  min-width: 0;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: $dark-card;
+
+  border: 1px solid $dark-border;
+
+  border-radius: 0.8rem;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* ======================================================
+   CHAT HEADER
+====================================================== */
+
+.chat-panel-header {
+  flex-shrink: 0;
+
+  min-height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 0.8rem 1rem;
+
+  border-bottom: 1px solid $dark-border;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.chat-title-area {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.65rem;
+
+  min-width: 0;
+
+  h2 {
+    margin: 0;
+
+    font-size: 0.88rem;
+
+    font-weight: 650;
+
+    color: $dark-text-primary;
+
+    transition: color 0.25s ease;
+  }
+
+  p {
+    margin: 0.18rem 0 0;
+
+    color: $dark-text-muted;
+
+    font-size: 0.65rem;
+
+    transition: color 0.25s ease;
+  }
+}
+
+/* ======================================================
+   CHAT AVATAR
+====================================================== */
+
+.chat-avatar {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 0.55rem;
+
+  background-color: rgba($accent, 0.1);
+
+  border: 1px solid rgba($accent, 0.2);
+
+  color: $accent;
+
+  font-size: 0.65rem;
+
+  font-weight: 800;
+}
+
+/* ======================================================
+   RAG STATUS
+====================================================== */
+
+.rag-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  padding: 0.35rem 0.55rem;
+
+  border-radius: 0.45rem;
+
+  border: 1px solid rgba($success, 0.15);
+
+  background-color: rgba($success, 0.05);
+
+  color: $success;
+
+  font-size: 0.62rem;
+
+  white-space: nowrap;
+
+  span {
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background-color: $success;
+
+    box-shadow: 0 0 7px rgba($success, 0.5);
+  }
+}
+
+/* ======================================================
+   MESSAGES AREA
+====================================================== */
+
+.messages-area {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  padding: 1rem;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.85rem;
+
+  scrollbar-width: thin;
+}
+
+/* ======================================================
+   EMPTY STATE
+====================================================== */
+
+.chat-empty-state {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 1rem;
+
+  h3 {
+    margin: 0 0 0.35rem;
+
+    font-size: 1rem;
+
+    color: $dark-text-primary;
+
+    transition: color 0.25s ease;
+  }
+
+  p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: $dark-text-muted;
+
+    font-size: 0.72rem;
+
+    line-height: 1.55;
+
+    transition: color 0.25s ease;
+  }
+}
+
+.empty-icon {
+  width: 52px;
+
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 0.8rem;
+
+  border-radius: 0.8rem;
+
+  background-color: rgba($accent, 0.08);
+
+  border: 1px solid rgba($accent, 0.15);
+
+  color: $accent;
+
+  font-size: 1.2rem;
+}
+
+/* ======================================================
+   EMPTY EXAMPLES
+====================================================== */
+
+.empty-example-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+
+  gap: 0.45rem;
+
+  margin-top: 1rem;
+
+  width: 100%;
+
+  max-width: 560px;
+
+  button {
+    padding: 0.6rem 0.5rem;
+
+    border: 1px solid $dark-border;
+
+    border-radius: 0.5rem;
+
+    background-color: $dark-input;
+
+    color: $dark-text-muted;
+
+    font-family: $font-stack;
+
+    font-size: 0.65rem;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      border-color: rgba($accent, 0.35);
+
+      color: $dark-text-primary;
+    }
+  }
+}
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.loading-circle {
+  width: 26px;
+
+  height: 26px;
+
+  margin-bottom: 0.7rem;
+
+  border: 2px solid $dark-border;
+
+  border-top-color: $accent;
+
+  border-radius: 50%;
+
+  animation: pilot-spin 0.8s linear infinite;
+}
+
+@keyframes pilot-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ======================================================
+   CHAT MESSAGE
+====================================================== */
+
+.chat-message {
+  width: fit-content;
+
+  max-width: 78%;
+
+  padding: 0.75rem 0.85rem;
+
+  border-radius: 0.7rem;
+
+  line-height: 1.55;
+
+  white-space: pre-wrap;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.chat-message--user {
+  align-self: flex-end;
+
+  background: linear-gradient(135deg, $accent, darken($accent, 8%));
+
+  color: #ffffff;
+
+  border-bottom-right-radius: 0.2rem;
+}
+
+.chat-message--assistant {
+  align-self: flex-start;
+
+  background-color: $dark-panel;
+
+  border: 1px solid $dark-border;
+
+  color: $dark-text-primary;
+
+  border-bottom-left-radius: 0.2rem;
+}
+
+/* ======================================================
+   MESSAGE META
+====================================================== */
+
+.message-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  margin-bottom: 0.4rem;
+
+  font-size: 0.62rem;
+
+  font-weight: 650;
+
+  opacity: 0.72;
+}
+
+.message-avatar {
+  min-width: 21px;
+
+  height: 21px;
+
+  padding: 0 0.25rem;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 0.35rem;
+
+  background-color: rgba(255, 255, 255, 0.08);
+
+  color: inherit;
+
+  font-size: 0.55rem;
+
+  font-weight: 700;
+}
+
+.message-content {
+  font-size: 0.76rem;
+
+  overflow-wrap: anywhere;
+
+  color: inherit;
+}
+
+/* ======================================================
+   SOURCES
+====================================================== */
+
+.message-sources {
+  margin-top: 0.6rem;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 0.3rem;
+
+  font-size: 0.58rem;
+}
+
+.sources-label {
+  color: $dark-text-muted;
+}
+
+.source-chip {
+  padding: 0.18rem 0.35rem;
+
+  border-radius: 0.3rem;
+
+  border: 1px solid rgba($accent, 0.15);
+
+  background-color: rgba($accent, 0.05);
+
+  color: $accent-alt;
+}
+
+/* ======================================================
+   THINKING
+====================================================== */
+
+.thinking-indicator {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.25rem;
+
+  span {
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background-color: $accent;
+
+    animation: pilot-thinking 1s infinite ease-in-out;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  label {
+    margin-left: 0.35rem;
+
+    color: $dark-text-muted;
+
+    font-size: 0.65rem;
+  }
+}
+
+@keyframes pilot-thinking {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+
+    transform: translateY(-2px);
+  }
+}
+
+/* ======================================================
+   ERROR
+====================================================== */
+
+.resume-pilot-error {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  margin: 0 0.9rem;
+
+  padding: 0.55rem 0.65rem;
+
+  border-radius: 0.5rem;
+
+  background-color: rgba(255, 77, 109, 0.08);
+
+  border: 1px solid rgba(255, 77, 109, 0.18);
+
+  color: #ff6b82;
+
+  font-size: 0.65rem;
+
+  span {
+    width: 16px;
+
+    height: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: rgba(255, 77, 109, 0.12);
+  }
+}
+
+/* ======================================================
+   CHAT INPUT
+====================================================== */
+
+.resume-pilot-page .chat-input-area {
+  width: 100%;
+
+  flex-shrink: 0;
+
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  align-items: stretch;
+
+  justify-content: stretch;
+
+  gap: 0.6rem;
+
+  padding: 0.8rem;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid $dark-border;
+
+  background-color: rgba(255, 255, 255, 0.01);
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* ======================================================
+   INPUT WRAPPER
+====================================================== */
+
+.resume-pilot-page .input-wrapper {
+  flex: 1 1 0;
+
+  min-width: 0;
+
+  width: auto;
+
+  position: relative;
+
+  display: block;
+}
+
+/* ======================================================
+   INPUT TEXTAREA
+====================================================== */
+
+.resume-pilot-page .input-wrapper textarea {
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 54px;
+
+  max-height: 130px;
+
+  resize: vertical;
+
+  box-sizing: border-box;
+
+  padding: 0.7rem 0.75rem 1.65rem;
+
+  border: 1px solid $dark-border;
+
+  border-radius: 0.6rem;
+
+  outline: none;
+
+  background-color: $dark-input;
+
+  color: $dark-text-primary;
+
+  font-family: $font-stack;
+
+  font-size: 0.73rem;
+
+  line-height: 1.45;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.2s ease,
+    color 0.25s ease,
+    box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: $dark-text-muted;
+  }
+
+  &:focus {
+    border-color: $accent;
+
+    box-shadow: 0 0 0 2px rgba($accent, 0.08);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+  }
+}
+
+/* ======================================================
+   INPUT HINT
+====================================================== */
+
+.resume-pilot-page .input-hint {
+  position: absolute;
+
+  left: 0.65rem;
+
+  right: 0.65rem;
+
+  bottom: 0.45rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 0.5rem;
+
+  color: $dark-text-muted;
+
+  font-size: 0.55rem;
+
+  pointer-events: none;
+}
+
+/* ======================================================
+   SEND BUTTON
+====================================================== */
+
+.resume-pilot-page .send-button {
+  flex: 0 0 110px;
+
+  width: 110px;
+
+  min-width: 110px;
+
+  max-width: 110px;
+
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  padding: 0 1rem;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-radius: 0.6rem;
+
+  background: linear-gradient(135deg, $accent 0%, darken($accent, 8%) 100%);
+
+  color: #ffffff;
+
+  font-family: $font-stack;
+
+  font-size: 0.7rem;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.1s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+  }
+}
+
+.send-loading {
+  letter-spacing: 0.12rem;
+
+  font-size: 1rem;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.resume-pilot-footer {
+  flex-shrink: 0;
+
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 0.25rem;
+
+  color: $dark-text-muted;
+
+  font-size: 0.56rem;
+
+  transition: color 0.25s ease;
+}
+
+/* ======================================================
+   ======================================================
+   LIGHT THEME
+
+   IMPORTANT:
+   App.jsx uses:
+
+   <div className={`app ${theme}-theme`}>
+
+   Therefore the correct selector is:
+
+   .light-theme .resume-pilot-page
+   ======================================================
+   ====================================================== */
+
+.light-theme .resume-pilot-page {
+  background-color: $light-page !important;
+
+  color: $light-text-primary !important;
+
+  /* ==================================================
+     BRAND
+  ================================================== */
+
+  .resume-pilot-brand {
+    h1 {
+      color: $light-text-primary !important;
+    }
+
+    p {
+      color: $light-text-muted !important;
+    }
+  }
+
+  /* ==================================================
+     DASHBOARD BUTTON
+  ================================================== */
+
+  .back-dashboard-btn {
+    background-color: $light-card !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-primary !important;
+
+    &:hover {
+      background-color: $light-panel !important;
+
+      border-color: $accent !important;
+
+      color: $light-text-primary !important;
+    }
+
+    span {
+      color: $accent !important;
+    }
+  }
+
+  /* ==================================================
+     SIDEBAR CARDS
+  ================================================== */
+
+  .pilot-sidebar-card {
+    background-color: $light-card !important;
+
+    border-color: $light-border !important;
+  }
+
+  .sidebar-card-heading {
+    color: $light-text-primary !important;
+  }
+
+  .optional-label {
+    color: $light-text-muted !important;
+  }
+
+  .memory-status-row {
+    color: $light-text-muted !important;
+  }
+
+  .sidebar-description {
+    color: $light-text-muted !important;
+  }
+
+  .textarea-footer {
+    color: $light-text-muted !important;
+  }
+
+  /* ==================================================
+     MEMORY BADGE
+  ================================================== */
+
+  .memory-badge {
+    background-color: rgba($accent, 0.05) !important;
+
+    border-color: rgba($accent, 0.14) !important;
+
+    color: $accent !important;
+  }
+
+  /* ==================================================
+     TARGET JOB
+  ================================================== */
+
+  .target-role-card textarea {
+    background-color: $light-input !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-primary !important;
+
+    &::placeholder {
+      color: $light-text-muted !important;
+    }
+
+    &:focus {
+      border-color: $accent !important;
+
+      box-shadow: 0 0 0 2px rgba($accent, 0.08) !important;
+    }
+  }
+
+  /* ==================================================
+     QUICK PROMPTS
+  ================================================== */
+
+  .quick-prompts button {
+    background-color: $light-panel !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-muted !important;
+
+    &:hover {
+      background-color: $light-input !important;
+
+      border-color: rgba($accent, 0.3) !important;
+
+      color: $light-text-primary !important;
+    }
+  }
+
+  /* ==================================================
+     CHAT PANEL
+  ================================================== */
+
+  .resume-pilot-chat-panel {
+    background-color: $light-card !important;
+
+    border-color: $light-border !important;
+  }
+
+  /* ==================================================
+     CHAT HEADER
+  ================================================== */
+
+  .chat-panel-header {
+    border-bottom-color: $light-border !important;
+  }
+
+  .chat-title-area {
+    h2 {
+      color: $light-text-primary !important;
+    }
+
+    p {
+      color: $light-text-muted !important;
+    }
+  }
+
+  /* ==================================================
+     CHAT AVATAR
+  ================================================== */
+
+  .chat-avatar {
+    background-color: rgba($accent, 0.07) !important;
+
+    border-color: rgba($accent, 0.18) !important;
+
+    color: $accent !important;
+  }
+
+  /* ==================================================
+     ASSISTANT MESSAGE
+  ================================================== */
+
+  .chat-message--assistant {
+    background-color: $light-panel !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-primary !important;
+  }
+
+  .chat-message--assistant .message-content {
+    color: $light-text-primary !important;
+  }
+
+  .chat-message--assistant .message-meta {
+    color: $light-text-muted !important;
+  }
+
+  /* ==================================================
+     USER MESSAGE
+  ================================================== */
+
+  .chat-message--user {
+    color: #ffffff !important;
+  }
+
+  /* ==================================================
+     MESSAGE AVATAR
+  ================================================== */
+
+  .message-avatar {
+    background-color: rgba(0, 0, 0, 0.06) !important;
+
+    color: $light-text-primary !important;
+  }
+
+  .chat-message--user .message-avatar {
+    background-color: rgba(255, 255, 255, 0.14) !important;
+
+    color: #ffffff !important;
+  }
+
+  /* ==================================================
+     SOURCES
+  ================================================== */
+
+  .sources-label {
+    color: $light-text-muted !important;
+  }
+
+  .source-chip {
+    background-color: rgba($accent, 0.05) !important;
+
+    border-color: rgba($accent, 0.15) !important;
+
+    color: $accent !important;
+  }
+
+  /* ==================================================
+     EMPTY STATE
+  ================================================== */
+
+  .chat-empty-state {
+    h3 {
+      color: $light-text-primary !important;
+    }
+
+    p {
+      color: $light-text-muted !important;
+    }
+  }
+
+  .empty-icon {
+    background-color: rgba($accent, 0.08) !important;
+
+    border-color: rgba($accent, 0.15) !important;
+
+    color: $accent !important;
+  }
+
+  .empty-example-grid button {
+    background-color: $light-panel !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-muted !important;
+
+    &:hover {
+      border-color: rgba($accent, 0.35) !important;
+
+      color: $light-text-primary !important;
+    }
+  }
+
+  /* ==================================================
+     LOADING
+  ================================================== */
+
+  .loading-circle {
+    border-color: $light-border !important;
+
+    border-top-color: $accent !important;
+  }
+
+  /* ==================================================
+     THINKING
+  ================================================== */
+
+  .thinking-indicator label {
+    color: $light-text-muted !important;
+  }
+
+  /* ==================================================
+     INPUT AREA
+  ================================================== */
+
+  .chat-input-area {
+    background-color: $light-card !important;
+
+    border-top-color: $light-border !important;
+  }
+
+  .input-wrapper textarea {
+    background-color: $light-input !important;
+
+    border-color: $light-border !important;
+
+    color: $light-text-primary !important;
+
+    &::placeholder {
+      color: $light-text-muted !important;
+    }
+
+    &:focus {
+      border-color: $accent !important;
+
+      box-shadow: 0 0 0 2px rgba($accent, 0.08) !important;
+    }
+  }
+
+  .input-hint {
+    color: $light-text-muted !important;
+  }
+
+  /* ==================================================
+     FOOTER
+  ================================================== */
+
+  .resume-pilot-footer {
+    color: $light-text-muted !important;
+  }
+}
+
+/* ======================================================
+   DARK THEME
+
+   App.jsx:
+
+   <div className={`app ${theme}-theme`}>
+
+   Explicit dark selector for consistency.
+====================================================== */
+
+.dark-theme .resume-pilot-page {
+  background-color: $dark-page !important;
+
+  color: $dark-text-primary !important;
+
+  .resume-pilot-brand {
+    h1 {
+      color: $dark-text-primary !important;
+    }
+
+    p {
+      color: $dark-text-muted !important;
+    }
+  }
+
+  .back-dashboard-btn {
+    background-color: $dark-card !important;
+
+    border-color: $dark-border !important;
+
+    color: $dark-text-primary !important;
+  }
+
+  .pilot-sidebar-card {
+    background-color: $dark-card !important;
+
+    border-color: $dark-border !important;
+  }
+
+  .sidebar-card-heading {
+    color: $dark-text-primary !important;
+  }
+
+  .memory-status-row {
+    color: $dark-text-muted !important;
+  }
+
+  .sidebar-description {
+    color: $dark-text-muted !important;
+  }
+
+  .optional-label {
+    color: $dark-text-muted !important;
+  }
+
+  .target-role-card textarea {
+    background-color: $dark-input !important;
+
+    border-color: $dark-border !important;
+
+    color: $dark-text-primary !important;
+
+    &::placeholder {
+      color: $dark-text-muted !important;
+    }
+  }
+
+  .quick-prompts button {
+    background-color: rgba(255, 255, 255, 0.025) !important;
+
+    border-color: transparent !important;
+
+    color: $dark-text-muted !important;
+  }
+
+  .resume-pilot-chat-panel {
+    background-color: $dark-card !important;
+
+    border-color: $dark-border !important;
+  }
+
+  .chat-panel-header {
+    border-bottom-color: $dark-border !important;
+  }
+
+  .chat-title-area h2 {
+    color: $dark-text-primary !important;
+  }
+
+  .chat-title-area p {
+    color: $dark-text-muted !important;
+  }
+
+  .chat-message--assistant {
+    background-color: $dark-panel !important;
+
+    border-color: $dark-border !important;
+
+    color: $dark-text-primary !important;
+  }
+
+  .chat-message--assistant .message-content {
+    color: $dark-text-primary !important;
+  }
+
+  .message-avatar {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+
+    color: $dark-text-primary !important;
+  }
+
+  .sources-label {
+    color: $dark-text-muted !important;
+  }
+
+  .empty-example-grid button {
+    background-color: $dark-input !important;
+
+    border-color: $dark-border !important;
+
+    color: $dark-text-muted !important;
+  }
+
+  .chat-input-area {
+    background-color: rgba(255, 255, 255, 0.01) !important;
+
+    border-top-color: $dark-border !important;
+  }
+
+  .input-wrapper textarea {
+    background-color: $dark-input !important;
+
+    border-color: $dark-border !important;
+
+    color: $dark-text-primary !important;
+
+    &::placeholder {
+      color: $dark-text-muted !important;
+    }
+  }
+
+  .input-hint {
+    color: $dark-text-muted !important;
+  }
+
+  .resume-pilot-footer {
+    color: $dark-text-muted !important;
+  }
+}
+
+/* ======================================================
+   TABLET
+====================================================== */
+
+@media (max-width: 900px) {
+  .resume-pilot-workspace {
+    grid-template-columns:
+      230px
+      minmax(0, 1fr);
+  }
+
+  .empty-example-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-message {
+    max-width: 85%;
+  }
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media (max-width: 700px) {
+  .resume-pilot-shell {
+    padding: 0.7rem;
+  }
+
+  .resume-pilot-topbar {
+    height: 48px;
+  }
+
+  .resume-pilot-brand p {
+    display: none;
+  }
+
+  .resume-pilot-logo {
+    width: 34px;
+
+    height: 34px;
+  }
+
+  .resume-pilot-workspace {
+    grid-template-columns: 1fr;
+
+    min-height: 0;
+  }
+
+  .resume-pilot-sidebar {
+    display: none;
+  }
+
+  .resume-pilot-chat-panel {
+    min-height: 0;
+  }
+
+  .chat-message {
+    max-width: 90%;
+  }
+
+  .rag-status {
+    display: none;
+  }
+
+  .resume-pilot-page .chat-input-area {
+    flex-direction: row !important;
+
+    align-items: stretch;
+
+    gap: 0.45rem;
+
+    padding: 0.6rem;
+  }
+
+  .resume-pilot-page .input-wrapper {
+    flex: 1 1 0;
+
+    min-width: 0;
+  }
+
+  .resume-pilot-page .input-wrapper textarea {
+    min-height: 50px;
+
+    padding-left: 0.65rem;
+
+    padding-right: 0.65rem;
+  }
+
+  .resume-pilot-page .send-button {
+    flex: 0 0 68px;
+
+    width: 68px;
+
+    min-width: 68px;
+
+    max-width: 68px;
+
+    height: 50px;
+
+    padding: 0;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      width: 17px;
+
+      height: 17px;
+    }
+  }
+
+  .resume-pilot-footer {
+    display: none;
+  }
+
+  .back-dashboard-btn {
+    padding: 0.5rem 0.6rem;
+  }
+}
+
+/* ======================================================
+   SMALL MOBILE
+====================================================== */
+
+@media (max-width: 400px) {
+  .resume-pilot-topbar-actions {
+    gap: 0.3rem;
+  }
+
+  .resume-pilot-page .send-button {
+    flex-basis: 58px;
+
+    width: 58px;
+
+    min-width: 58px;
+
+    max-width: 58px;
+  }
+
+  .resume-pilot-page .input-hint {
+    font-size: 0.5rem;
+
+    span:first-child {
+      display: none;
+    }
+  }
+
+  .back-dashboard-btn {
+    font-size: 0.7rem;
+
+    span {
+      display: none;
+    }
+  }
+}

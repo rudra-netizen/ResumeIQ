@@ -1,11 +1,20 @@
+// ============================================
+// Interview Page & PDF Download Animations
+// ============================================
+
+$accent: #ff2d78;
+$accent-cyan: #06b6d4;
+$accent-emerald: #10b981;
+
 $bg-page: #0d1117;
 $bg-card: #161b22;
 $bg-panel: #1c2230;
 $bg-input: #1e2535;
+
 $border-color: #2a3348;
 $text-primary: #e6edf3;
 $text-muted: #7d8590;
-$accent: #ff2d78;
+
 $font-stack:
   system-ui,
   -apple-system,
@@ -22,6 +31,9 @@ $severity-low: #3fb950;
   display: none;
 }
 
+// --------------------------------------------
+// INTERVIEW PAGE LAYOUT
+// --------------------------------------------
 .interview-page {
   width: 100%;
   min-height: 100vh;
@@ -51,6 +63,9 @@ $severity-low: #3fb950;
   flex-shrink: 0;
 }
 
+// --------------------------------------------
+// LEFT NAVIGATION & DOWNLOAD BUTTON
+// --------------------------------------------
 .interview-nav {
   width: 220px;
   flex-shrink: 0;
@@ -108,8 +123,49 @@ $severity-low: #3fb950;
     align-items: center;
     flex-shrink: 0;
   }
+
+  .download-resume-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, $accent 0%, darken($accent, 12%) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform 0.15s,
+      opacity 0.2s,
+      box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba($accent, 0.3);
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba($accent, 0.45);
+
+      svg {
+        transform: translateY(2px);
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
 }
 
+// --------------------------------------------
+// CENTER CONTENT
+// --------------------------------------------
 .interview-content {
   flex: 1;
   padding: 1.75rem 2rem;
@@ -253,13 +309,15 @@ $severity-low: #3fb950;
   }
 }
 
+// --------------------------------------------
+// ROADMAP TIMELINE
+// --------------------------------------------
 .roadmap-list {
   display: flex;
   flex-direction: column;
   gap: 0;
   position: relative;
 
-  // vertical timeline line
   &::before {
     content: "";
     position: absolute;
@@ -279,7 +337,6 @@ $severity-low: #3fb950;
   padding: 0.75rem 0 0.75rem 3.5rem;
   position: relative;
 
-  // dot on timeline
   &::before {
     content: "";
     position: absolute;
@@ -343,6 +400,9 @@ $severity-low: #3fb950;
   }
 }
 
+// --------------------------------------------
+// RIGHT SIDEBAR
+// --------------------------------------------
 .interview-sidebar {
   width: 240px;
   flex-shrink: 0;
@@ -462,5 +522,490 @@ $severity-low: #3fb950;
     color: $severity-low;
     background-color: rgba($severity-low, 0.1);
     border-color: rgba($severity-low, 0.25);
+  }
+}
+
+// --------------------------------------------
+// ANIMATED PDF DOWNLOAD / LOADING SCREEN
+// --------------------------------------------
+.interview-download-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+
+  .loader-backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    .loader-ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.35;
+    }
+
+    .glow-accent {
+      width: 440px;
+      height: 440px;
+      top: 15%;
+      left: 20%;
+      background: radial-gradient(circle, $accent 0%, transparent 70%);
+    }
+
+    .glow-cyan {
+      width: 480px;
+      height: 480px;
+      bottom: 12%;
+      right: 18%;
+      background: radial-gradient(circle, $accent-cyan 0%, transparent 70%);
+      opacity: 0.25;
+    }
+
+    .loader-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  }
+
+  .download-loader-card {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+    gap: 2.2rem;
+  }
+
+  /* PDF Document Animation Graphic */
+  .pdf-doc-anim {
+    position: relative;
+    width: 200px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pdf-file-sheet {
+      position: relative;
+      width: 120px;
+      height: 155px;
+      background: rgba(22, 27, 34, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1rem 0.85rem;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      overflow: hidden;
+      animation: floatDoc 3s ease-in-out infinite;
+
+      .pdf-corner-fold {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 20px 20px 0;
+        border-color: transparent rgba(255, 255, 255, 0.2) transparent
+          transparent;
+      }
+
+      .pdf-badge {
+        font-size: 0.62rem;
+        font-weight: 800;
+        color: #ffffff;
+        background: $accent;
+        padding: 0.15rem 0.45rem;
+        border-radius: 4px;
+        align-self: flex-start;
+        box-shadow: 0 0 10px rgba($accent, 0.4);
+      }
+
+      .pdf-doc-lines {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 4px;
+
+        .line {
+          height: 4px;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 2px;
+
+          &.header-line {
+            width: 70%;
+            background: rgba(255, 255, 255, 0.4);
+          }
+          &.mid-line {
+            width: 50%;
+          }
+          &.full-line {
+            width: 100%;
+          }
+          &.short-line {
+            width: 40%;
+          }
+        }
+
+        .chip-row {
+          display: flex;
+          gap: 3px;
+          margin: 3px 0;
+
+          .tiny-chip {
+            width: 18px;
+            height: 4px;
+            background: rgba($accent-cyan, 0.3);
+            border-radius: 2px;
+          }
+        }
+      }
+
+      // Download scanning laser
+      .download-laser-beam {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          $accent,
+          $accent-cyan,
+          transparent
+        );
+        box-shadow: 0 0 12px 2px $accent;
+        animation: laserScan 2s ease-in-out infinite alternate;
+      }
+    }
+
+    // Radar Rings
+    .download-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba($accent, 0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+
+      &.circle-1 {
+        width: 190px;
+        height: 190px;
+        animation: pulseRing 2.8s linear infinite;
+      }
+      &.circle-2 {
+        width: 260px;
+        height: 260px;
+        animation: pulseRing 2.8s linear infinite 1.4s;
+      }
+    }
+  }
+
+  /* Text & Information Group */
+  .download-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba($accent, 0.1);
+      border: 1px solid rgba($accent, 0.3);
+      color: $accent;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+
+        &.dot-pulse {
+          background: $accent;
+          box-shadow: 0 0 8px $accent;
+          animation: dotBlink 1.4s ease-in-out infinite;
+        }
+
+        &.dot-success {
+          background: $accent-emerald;
+          box-shadow: 0 0 8px $accent-emerald;
+        }
+      }
+    }
+
+    .download-heading {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: $text-primary;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .download-subtext {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-height: 44px;
+      animation: fadeInText 0.3s ease-out;
+
+      strong {
+        font-size: 0.95rem;
+        color: #cbd5e1;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.82rem;
+        color: $text-muted;
+      }
+
+      .success-redirect-msg {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $accent-emerald;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+      }
+    }
+
+    /* Progress bar */
+    .download-progress-track {
+      height: 5px;
+      width: 100%;
+      max-width: 360px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+
+      .download-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, $accent, $accent-cyan);
+        border-radius: 999px;
+        transition: width 0.45s ease-in-out;
+
+        &.fill-complete {
+          background: $accent-emerald;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------
+// LIGHT THEME OVERRIDES
+// --------------------------------------------
+.light-theme {
+  .interview-page {
+    background-color: #f5f7fa;
+    color: #1f2937;
+  }
+
+  .interview-layout {
+    background-color: #ffffff;
+    border-color: #d9dee7;
+  }
+
+  .interview-divider,
+  .sidebar-divider {
+    background-color: #d9dee7;
+  }
+
+  .interview-nav {
+    background-color: #ffffff;
+
+    &__label {
+      color: #6b7280;
+    }
+    &__item {
+      color: #6b7280;
+      &:hover {
+        background-color: #eef2f7;
+        color: #1f2937;
+      }
+      &--active {
+        background-color: rgba($accent, 0.08);
+        color: $accent;
+      }
+    }
+  }
+
+  .interview-content {
+    background-color: #ffffff;
+
+    .content-header {
+      border-bottom-color: #d9dee7;
+      h2 {
+        color: #1f2937;
+      }
+      &__count {
+        background-color: #f1f5f9;
+        border-color: #d9dee7;
+        color: #6b7280;
+      }
+    }
+
+    .q-card {
+      background-color: #f8fafc;
+      border-color: #d9dee7;
+      &__question {
+        color: #1f2937;
+      }
+      &__body {
+        border-top-color: #d9dee7;
+      }
+      &__section p {
+        color: #596579;
+      }
+      &__chevron {
+        color: #6b7280;
+      }
+    }
+  }
+
+  .interview-sidebar {
+    background-color: #ffffff;
+    .match-score__label,
+    .match-score__pct,
+    .skill-gaps__label {
+      color: #6b7280;
+    }
+    .match-score__value {
+      color: #1f2937;
+    }
+  }
+
+  /* Light Theme Download Loader */
+  .interview-download-page {
+    background-color: #f5f7fa;
+    color: #1f2937;
+
+    .loader-backdrop .loader-ambient-glow {
+      opacity: 0.12;
+    }
+
+    .loader-backdrop .loader-grid-lines {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    }
+
+    .pdf-file-sheet {
+      background: #ffffff !important;
+      border-color: #d9dee7 !important;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08) !important;
+
+      .line {
+        background: #e2e8f0 !important;
+        &.header-line {
+          background: #334155 !important;
+        }
+      }
+    }
+
+    .download-text-group {
+      .download-heading {
+        color: #0f172a;
+      }
+      .download-subtext strong {
+        color: #1e293b;
+      }
+      .download-subtext p {
+        color: #64748b;
+      }
+      .download-progress-track {
+        background: #e2e8f0;
+      }
+    }
+  }
+}
+
+// --------------------------------------------
+// KEYFRAME ANIMATIONS
+// --------------------------------------------
+@keyframes floatDoc {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes laserScan {
+  0% {
+    top: 0%;
+    opacity: 0.3;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 96%;
+    opacity: 0.3;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0.65);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes dotBlink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

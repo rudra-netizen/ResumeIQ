@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const mammoth = require("mammoth");
 const { PDFParse } = require("pdf-parse");
+const {
+  indexResumeForResumePilot,
+} = require("../services/resumePilot.service");
 
 const interviewReportModel = require("../models/interviewReport.model");
 
@@ -158,6 +161,28 @@ async function generateInterViewReportController(req, res) {
       // IMPORTANT
       user: userId,
     });
+
+    // ======================================================
+    // RESUME PILOT INDEXING
+    // ======================================================
+
+    try {
+      const resumeVersion = await interviewReportModel.countDocuments({
+        user: userId,
+      });
+
+      await indexResumeForResumePilot({
+        report: savedReport,
+        userId,
+        resumeVersion,
+      });
+
+      console.log(`ResumePilot indexed resume version ${resumeVersion}`);
+    } catch (error) {
+      console.error("ResumePilot indexing failed:", error);
+
+      // Interview report should still be successful
+    }
 
     return res.status(201).json({
       message: "Interview report generated successfully.",
